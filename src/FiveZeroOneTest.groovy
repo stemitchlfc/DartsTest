@@ -138,6 +138,5 @@ class FiveZeroOneTest {
         assertEquals(game501.legComplete(), true)
         assertEquals(game501.dartsAtDouble("2"), "2")
         assertEquals(game501.totalDartsForLeg(), 23)
-        //assertEquals(game501.addDoubleToTotal("2"), 17)
     }
 }

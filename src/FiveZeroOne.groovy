@@ -10,13 +10,26 @@ class FiveZeroOne {
     private int dartsThrown
     private int dartsCounter
     private int finalDarts
+    private int tempCounter = 0
+    private String inputScore
+    private String inputDarts
 
     public FiveZeroOne(){
         this.remainingScore = startingScore
-        //this.startingScore = startingScore
+        this.inputScore = inputScore
+        this.inputDarts = inputDarts
     }
     public int getStartingScore(){
         return startingScore
+    }
+
+
+
+    public String userInput(){
+        println "Please enter your score: "
+        def inputScore=System.in.newReader().readLine()
+        this.inputScore = inputScore
+        this.removeScore(this.inputScore)
     }
 
     public String removeScore(String inputScore){
@@ -26,8 +39,20 @@ class FiveZeroOne {
             int score = inputScore as int
             if (this.isValidScore(score)) {
                 this.remainingScore = this.remainingScore - score
-                dartsThrown+3
-                dartsCounter++
+                this.tempCounter += 3
+                this.getCurrentScore()
+                if(legComplete()){
+                    println "Please enter the number of darts at a double: "
+                    def inputDarts = System.in.newReader().readLine()
+                    this.inputDarts = inputDarts
+                    this.dartsAtDouble(inputDarts)
+                } else {
+                    if(isOnFinish()){
+                        println "You are on a finish, remaining score is $remainingScore"
+                    }
+                    this.userInput()
+                }
+                //println "The darts counter $dartsCounter"
                 return inputScore
             }
                 println "Invalid Score"
@@ -75,7 +100,8 @@ class FiveZeroOne {
         println "Your darts at a double are: $inputDarts"
         int finishingDarts = inputDarts as int
         if (this.isDoubleValid(finishingDarts)) {
-            this.finalDarts = this.dartsThrown + finishingDarts
+            this.tempCounter += finishingDarts
+            //this.finalDarts = this.dartsThrown + finishingDarts
             return finishingDarts
         }
         println "Invalid Score"
@@ -90,58 +116,7 @@ class FiveZeroOne {
     }
 
     int totalDartsForLeg(){
-        return this.finalDarts = this.dartsThrown + this.finishingDarts
+        println this.tempCounter
+        return this.tempCounter
     }
-
-    int addDoubleToTotal(){
-        this.getDartsThrown()
-        int this.finishingDarts = this.inputDarts as int
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//static void main(String[] args){
-//        def startingScore = 501
-//        def remainingScore
-//        println "Your starting score is $startingScore"
-//        println "Please enter your score: "
-//
-//
-//        def inputScore = System.in.newReader().readLine()
-//        //int score = System.in.newReader().read()
-//        println "Your score is: $inputScore"
-//        int score = inputScore as int
-////        if (validScore() == true){
-////
-////        }
-//
-//        remainingScore = startingScore - score
-//        println "Your remaining score is $remainingScore"
-//
-//
-//        //println "Your name is ${System.in.newReader().readLine()}"
-//
-//    }
-//
-////    boolean validScore(score, startingScore, remainingScore){
-////        if(score>startingScore && score<remainingScore && score<=180){
-////            return false
-////        } else {
-////            return true
-////        }
 }
