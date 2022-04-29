@@ -3,9 +3,7 @@ class BobsTwentySeven {
     private int startingScore = 27
     private int currentScore
     private int aimingDouble
-    private int doublesHit
     private int doubles
-
 
     public BobsTwentySeven() {
         this.aimingDouble = 1
@@ -20,24 +18,60 @@ class BobsTwentySeven {
         this.aimingDouble
     }
 
-    int getUserInput(String userInput) {
-        try {
-            int doublesHit = userInput as int
-            if (this.isScoreValid(doublesHit)) {
-                return doublesHit
-            }
-        } catch (Exception err) {
-            println err.getMessage()
-        }
+    int userInputB27(int doubles) {
+                if (this.isScoreValid(doubles)) {
+                    if (doubles === 0) {
+                        this.currentScore -= this.aimingDouble * 2
+                        if (this.isGameOver()) {
+                            println "Game Over"
+                            //System.exit(0)
+                        }
+                        println "Your current score is $currentScore"
+                    } else {
+                        this.currentScore += (this.aimingDouble * 2) * doubles
+                        println "Your current score is $currentScore"
+                    }
+                    aimingDouble++
+                    return doubles
+                }
     }
 
-    public boolean isScoreValid(int doublesHit){
-        if(doublesHit <= 3){
-            println "Score is valid"
+    boolean isScoreValid(int doubles){
+        if(doubles <= 3){
             return true
         }
         println "Score is not valid"
         return false
     }
+
+    boolean isGameOver(){
+        if(this.currentScore<=0){
+            return true
+        }
+        return false
+    }
+
+    boolean isOnBull(){
+        if(aimingDouble > 20){
+            return true
+        }
+        return false
+    }
+
+    int getBullInputB27(int doubles){
+        if(doubles === 0){
+            this.currentScore -= 50
+        } else {
+            this.currentScore += (doubles * 50)
+        }
+        return currentScore
+
+    }
+    String gameWinB27(){
+        println"You Won! Winning score is $currentScore"
+        System.exit(0)
+    }
+
+
 
 }
