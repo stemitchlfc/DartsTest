@@ -9,6 +9,22 @@ class FiveZeroOneTest {
 
 
     @Test
+    void given_new_score() {
+        FiveZeroOne game501 = new FiveZeroOne()
+        assertEquals(game501.getStartingScore(), 501)
+        game501.inputScore(100)
+        assertEquals(game501.getCurrentScore(), 401)
+        game501.inputScore(100)
+        assertEquals(game501.getCurrentScore(), 301)
+        game501.inputScore(100)
+        assertEquals(game501.getCurrentScore(), 201)
+        game501.inputScore(100)
+        assertEquals(game501.getCurrentScore(), 101)
+        assertEquals(game501.isOnFinish(), true)
+    }
+
+
+    @Test
     void starting_score_shown() {
         FiveZeroOne game501 = new FiveZeroOne()
         assertEquals(game501.getStartingScore(), 501)

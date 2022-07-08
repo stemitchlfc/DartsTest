@@ -8,6 +8,7 @@ class FiveZeroOne {
     private int tempCounter = 0
     private String inputScore
     private String inputDarts
+    private int enteredScore
 
     FiveZeroOne() {
         this.remainingScore = startingScore
@@ -15,6 +16,10 @@ class FiveZeroOne {
 
     int getStartingScore() {
         return startingScore
+    }
+
+    void inputScore(int enteredScore) {
+        this.removeScore(enteredScore)
     }
 
     String removeScore(int score) {
@@ -35,7 +40,7 @@ class FiveZeroOne {
 
 
     boolean isValidScore(int score) {
-        if (score < 181 && score <= this.remainingScore) {
+        if (score >= 0 && score <= 180 && score <= this.remainingScore) {
             return true
         }
         return false
@@ -72,7 +77,7 @@ class FiveZeroOne {
         if (this.isDoubleValid(inputDarts)) {
             this.tempCounter += inputDarts - 3
             println "Your total darts thrown is $tempCounter"
-            return inputDarts
+            return this.tempCounter
         }
         println "Invalid Score"
         return "Invalid Score"
